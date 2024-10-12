@@ -1,0 +1,15 @@
+<link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+<div class="nav">
+    <a href="/">Logo</a>
+    {% if user.is_authenticated %}
+    <div class="btns0">
+        <a href="{% url 'view_cart' %}"><input type="submit" value="View cart"></a>
+        <a href="{% url 'logout' %}"><input type="submit" value="Logout"></a>
+    </div>
+    {% else %}
+    <div class="btns">
+        <a href="{% url 'login' %}"><input type="submit" value="Login"></a>
+        <a href="{% url 'signup' %}"><input type="submit" value="Signup"></a>
+    </div>
+    {% endif %}
+</div>

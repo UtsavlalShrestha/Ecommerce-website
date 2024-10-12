@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/view_cart.css' %}">
+{% if messages %}
+<div>
+    <!-- {% for message in messages %} -->
+    <div class="login-error">
+        {{ message }}
+    </div>
+    <!-- {% endfor %} -->
+</div>
+{% endif %}
+<h1>Your Cart</h1>
+
+{% if cart_items %}
+    <div class="cart-container">
+        {% for item in cart_items %}
+            <div class="cart-card">
+                <div class="cart-card-content">
+                    <h2 class="product-name">{{ item.product.name }}</h2>
+                    
+                    {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-product-image">
+                    {% endif %}
+                    
+                    <p class="product-price">Price: ${{ item.product.price|floatformat:2 }}</p>
+                    <p class="product-quantity">Quantity: {{ item.quantity }}</p>
+                    <br>
+                    <a href="{% url 'remove_cart' item.id %}"><input type="submit" value="Remove item"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="cart-total">
+        <p><strong>Total Amount: ${{ total_price|floatformat:2 }}</strong></p>
+    </div>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+<a href="{% url 'home' %}" class="continue-shopping">Continue Shopping</a>
+<a href="{% url 'checkout' %}" class="checkout">Checkout</a>
+{% endblock %}

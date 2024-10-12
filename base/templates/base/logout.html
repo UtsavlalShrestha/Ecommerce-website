@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<form method="POST" action="" class="logout-form">
+    {% csrf_token %}
+    <p>Are you sure you want to logout?</p>
+    <input type="submit" value="Logout" name="Logout">
+    <input type="submit" value="Go back" name="Go back">
+</form>
+
+
+
+{% endblock %}

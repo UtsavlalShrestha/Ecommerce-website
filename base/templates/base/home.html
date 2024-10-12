@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/home.css">
+<h1>Homepage</h1>
+
+{% if page_obj %}
+    <div class="product-list">
+        {% for x in page_obj %}
+            <div class="product-item">
+                <h2>{{ x.name }}</h2>
+                <div class="product-image">
+                    {% if x.image %}
+                        <img src="{{ x.image.url }}" alt="{{ x.name }}">
+                    {% endif %}
+                </div>
+                <p><strong>Quantity:</strong> {{ x.quantity }}</p>
+                <p><strong>Price:</strong> ${{ x.price }}</p>
+                <p class="product-description"><strong>Description:</strong> {{ x.description }}</p>
+                <hr>
+                <div class="bttns">
+                    <a href="{% url 'add_to_cart' x.id %}"><input type="submit" value="Add to cart"></a>
+                </div>
+            </div>
+
+        {% endfor %}
+        
+    </div>
+    {{page_obj}}
+    <hr>
+    {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages  }}">Last</a>
+
+    {% endif %}
+{% endif %}
+{% endblock %}
