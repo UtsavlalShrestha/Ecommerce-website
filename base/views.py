@@ -12,9 +12,6 @@ from django.core.mail import EmailMessage, send_mail
 from .tokens import account_activation_token
 from django.conf import settings
 from .models import ProductList, CartItem
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 
